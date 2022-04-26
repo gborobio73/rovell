@@ -1,85 +1,81 @@
-rouille::rouille! {
-    externe cagette rouille;
+rovell::rovell! {
+    utilitza std::collections::Diccionari;
 
-    utilisons std::collections::Dictionnaire comme Dico;
-
-    convention CléValeur {
-        fonction écrire(&soi, clé: Chaine, valeur: Chaine);
-        fonction lire(&soi, clé: Chaine) -> Résultat<PeutÊtre<&Chaine>, Chaine>;
+    tret Hola {
+        funció escriu(&jo, clau: Cadena, valor: Cadena);
+        funció obtén(&jo, clau: Cadena) -> Resultat<Opció<&Cadena>, Cadena>;
     }
 
-    statique mutable DICTIONNAIRE: PeutÊtre<Dico<Chaine, Chaine>> = Rien;
+    estàtic mutable DICCIONARI: Opció<Diccionari<Cadena, Cadena>> = Res;
 
-    structure Concrète;
+    estructura Concret;
 
-    réalisation CléValeur pour Concrète {
-        fonction écrire(&soi, clé: Chaine, valeur: Chaine) {
-            soit dico = dangereux {
-                DICTIONNAIRE.prendre_ou_insérer_avec(Défaut::défaut)
+    realitza Hola per Concret {
+        funció escriu(&jo, clau: Cadena, valor: Cadena) {
+            deixa dicc = insegur {
+                DICCIONARI.agafa_o_introdueix_amb(PerDefecte::perdefecte)
             };
-            dico.insérer(clé, valeur);
+            dicc.introdueix(clau, valor);
         }
-        fonction lire(&soi, clé: Chaine) -> Résultat<PeutÊtre<&Chaine>, Chaine> {
-            si soit Quelque(dico) = dangereux { DICTIONNAIRE.en_réf() } {
-                Bien(dico.lire(&clé))
-            } sinon {
-                Arf("fetchez le dico".vers())
+        funció obtén(&jo, clau: Cadena) -> Resultat<Opció<&Cadena>, Cadena> {
+            si deixa Algú(dicc) = insegur { DICCIONARI.com_referència() } {
+                Bé(dicc.agafa(&clau))
+            } sinó {
+                Futut("buscar al diccionari".cap_a_dins())
             }
         }
     }
 
-    public(cagette) fonction peut_etre(i: u32) -> PeutÊtre<Résultat<u32, Chaine>> {
+    públic(caixa) funció a_lo_millor(i: u32) -> Opció<Resultat<u32, Cadena>> {
         si i % 2 == 1 {
             si i == 42 {
-                Quelque(Arf(Chaine::depuis("merde")))
-            } sinon {
-                Quelque(Bien(33))
+                Algú(Futut(Cadena::desde("merda")))
+            } sinó {
+                Algú(Bé(33))
             }
-        } sinon {
-            Rien
+        } sinó {
+            Res
         }
     }
 
-    asynchrone fonction exemple() {
+    asíncron funció example() {
     }
 
-    asynchrone fonction exemple2() {
-        exemple().attend;
+    asíncron funció example2() {
+        example().espera;
     }
 
-    fonction principale() {
-        soit mutable x = 31;
+    funció principal() {
+        deixa mutable x = 31;
 
-        selon x {
+        iguala x {
             42 => {
-                affiche!("omelette du fromage")
+                escriulínia!("mare de déu")
             }
-            _ => affiche!("voila")
+            _ => escriulínia!("Com estàs!")
         }
 
-        pour i de 0..10 {
-            soit val = boucle {
-                arrête i;
+        per i en 0..10 {
+            deixa val = bucle {
+                interrupció i;
             };
 
-            tant que x < val {
+            mentre difús x < val {
                 x += 1;
             }
 
-            x = si soit Quelque(resultat) = peut_etre(i) {
-                resultat.déballer()
-            } sinon {
+            x = si deixa Algú(resultat) = a_lo_millor(i) {
+                resultat.desempaquetar()
+            } sinó {
                 12
             };
         }
 
-        //secondaire();
     }
 
-    #[légal(code_inaccessible)]
-    fonction secondaire() {
-        merde!("oh non"); // for the true French experience
-        calisse!("tabernacle"); // for friends speaking fr-ca
-        oups!("fetchez la vache"); // in SFW contexts
+    #[permetre(codificació_inaccessible)]
+    funció secundari() {
+        collons!("oh no!");
+        merda!("la mare que em va parir");
     }
 }

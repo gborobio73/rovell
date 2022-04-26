@@ -1,0 +1,18 @@
+[package]
+name = "rovell"
+description = "Rust programming, in Catalan."
+readme = "../readme.md"
+license = "MIT"
+homepage = "https://github.com/gborobio73/rovell"
+keywords = ["catalan"]
+authors = ["gborobio73", "rfranr"]
+categories = ["accessibility"]
+version = "0.1.0"
+edition = "2018"
+
+[lib]
+proc-macro = true
+
+[[example]]
+name = "comments"
+path = "examples/1_hello_world/comments.rs"
